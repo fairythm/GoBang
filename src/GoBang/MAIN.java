@@ -40,7 +40,7 @@ public class MAIN {
 
 		f=new JFrame();												//棋盘窗口初始化
 		f.setLayout(null);
-		f.setTitle("五子棋");										//设置游戏标题
+		f.setTitle("五子棋");											//设置游戏标题
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);			//设置关闭
 		f.setBackground(Color.black);
 
@@ -50,17 +50,17 @@ public class MAIN {
 		Screen.setBackground(Color.white);
 		f.add(Screen);
 
-		takebackmove=new JButton("悔棋");				//设置悔棋按钮
+		takebackmove=new JButton("");							//设置悔棋按钮
 		takebackmoveListener t=new takebackmoveListener();			//定义悔棋按钮监听器对象
 		moveListener[]m=new moveListener[225];						//初始化下棋监听器数组
 		takebackmove.addActionListener(t);							//注册悔棋按钮监听器
-		takebackmove.setBounds(0, 930, 450, 20);					//悔棋按钮排版
+		takebackmove.setBounds(0, 930, 450, 40);					//悔棋按钮排版
 		takebackmove.setBackground(Color.white);
 		f.add(takebackmove);										//将悔棋按钮放置于棋盘中
 
 		NewGameListener newgame=new NewGameListener();
 		NewGame=new JButton("新游戏");							//设开始新游戏按钮
-		NewGame.setBounds(450, 930, 450, 20);
+		NewGame.setBounds(450, 930, 450, 40);
 		NewGame.addActionListener(newgame);
 		NewGame.setBackground(Color.white);
 		f.add(NewGame);
@@ -80,7 +80,7 @@ public class MAIN {
 		}
 
 
-		f.setSize(918,997);											//设置棋盘屏幕分辨率
+		f.setSize(918,1017);							//设置棋盘屏幕分辨率
 
 		f.setVisible(true);											//打开游戏界面
 	}
@@ -92,12 +92,22 @@ public class MAIN {
 		{
 			if(GameOver==false){
 				if(log.acumulator==0){
-					Screen.setText("大哥你还没下棋呢");
 					return;
 				}
-				Screen.setText("你悔棋了，真可耻￣△￣ ");
+				if(log.acumulator!=1) {
+					if (log.acumulator % 2 == 0) {
+						Screen.setText("白方悔了一步棋");
+						takebackmove.setText("执黑方悔棋");
+					} else {
+						Screen.setText("黑方悔了一步棋");
+						takebackmove.setText("执白方悔棋");
+					}
+				}
+				else takebackmove.setText("");
 
-				buttons[log.move[log.acumulator]].setBackground(Color.yellow);;
+
+				buttons[log.move[log.acumulator]].setBackground(Color.yellow);
+				buff[log.move[log.acumulator]%15][log.move[log.acumulator]/15]=0;
 				log.move[log.acumulator]=-1;
 				log.acumulator--;
 			}
@@ -131,9 +141,10 @@ public class MAIN {
 					return;
 				if(log.acumulator%2==0){
 					//buttons[subscript].setText("X");
+					takebackmove.setText("执黑方悔棋");
 					buttons[subscript].setBackground(Color.black);
 					Screen.setText("黑棋落子  总落子数:"+(log.acumulator+1));
-					System.out.println("黑棋落子 总落子数:"+(log.acumulator+1));
+					//System.out.println("黑棋落子 总落子数:"+(log.acumulator+1));
 					buff[subscript%15][subscript/15]=1;
 					if(panduan(subscript)){
 						Screen.setText("黑棋赢");
@@ -142,6 +153,7 @@ public class MAIN {
 				}
 				else{
 					//buttons[subscript].setText("O");
+					takebackmove.setText("执白方悔棋");
 					buttons[subscript].setBackground(Color.white);
 					Screen.setText("白棋落子  总落子数:"+(log.acumulator+1));
 					buff[subscript%15][subscript/15]=-1;
