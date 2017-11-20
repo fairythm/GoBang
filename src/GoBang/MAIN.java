@@ -10,13 +10,13 @@ public class MAIN {
 	//全局变量区
 	//static Graphics pencil;
 	public int i,j;
-	int [][] buff;							//棋盘矩阵
-	JTextField Screen;						//设置反馈信息对话框
-	JFrame f;
-	JButton buttons[];
-	JButton takebackmove;					//设置悔棋按钮
-	JButton NewGame;							//设置重开按钮
-	boolean GameOver;
+	private int [][] buff;							//棋盘矩阵
+	private JTextField Screen;						//设置反馈信息对话框
+	private JFrame f;
+	private JButton buttons[];
+	private JButton takebackmove;					//设置悔棋按钮
+	private JButton NewGame;						//设置重开按钮
+	private boolean GameOver;
 
 
 
@@ -50,18 +50,19 @@ public class MAIN {
 		Screen.setBackground(Color.white);
 		f.add(Screen);
 
-		takebackmove=new JButton("Take Back Move ");				//设置悔棋按钮
+		takebackmove=new JButton("悔棋");				//设置悔棋按钮
 		takebackmoveListener t=new takebackmoveListener();			//定义悔棋按钮监听器对象
 		moveListener[]m=new moveListener[225];						//初始化下棋监听器数组
 		takebackmove.addActionListener(t);							//注册悔棋按钮监听器
 		takebackmove.setBounds(0, 930, 450, 20);					//悔棋按钮排版
-		//takebackmove.setBackground(Color.white);
+		takebackmove.setBackground(Color.white);
 		f.add(takebackmove);										//将悔棋按钮放置于棋盘中
 
 		NewGameListener newgame=new NewGameListener();
-		NewGame=new JButton("New Game");							//设开始新游戏按钮
+		NewGame=new JButton("新游戏");							//设开始新游戏按钮
 		NewGame.setBounds(450, 930, 450, 20);
 		NewGame.addActionListener(newgame);
+		NewGame.setBackground(Color.white);
 		f.add(NewGame);
 
 
@@ -104,7 +105,7 @@ public class MAIN {
 		}
 
 	}
-	private class NewGameListener implements ActionListener	//新游戏按钮监听器
+	private class NewGameListener implements ActionListener			//新游戏按钮监听器
 	{
 		public void actionPerformed(ActionEvent event)
 		{
@@ -114,13 +115,13 @@ public class MAIN {
 				buttons[i].setBackground(Color.yellow);
 				log.move[i]=-1;
 			}
-			Screen.setText("");
+			Screen.setText("开始新游戏");
 			log.acumulator=0;
 			GameOver=false;
 		}
 
 	}
-	public class moveListener implements ActionListener				//下棋监听
+	private class moveListener implements ActionListener			//下棋监听
 	{
 		public void actionPerformed(ActionEvent event){			//设置下棋事件
 			if(GameOver==false)
@@ -157,7 +158,7 @@ public class MAIN {
 		}
 		int subscript;
 	}
-	public boolean panduan(int subscript)							//赢棋判断器
+	private boolean panduan(int subscript)							//赢棋判断器
 	{
 		int x,y;
 		x=subscript%15;
@@ -206,7 +207,7 @@ public class MAIN {
 		}
 		return false;
 	}
-	public static class log{										//下棋日志
+	private static class log{										//下棋日志
 		public static int acumulator;
 		public static int move[];
 	}
