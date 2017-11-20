@@ -168,119 +168,43 @@ public class MAIN {
 			int a=0,w=0,s=0,d=0;
 			int i=0;
 
-			while(x+i+1<15&&buff[x+i+1][y]==1)
-			{
-				w++;
-				i++;
-			}
+			while(x+i+1<15&&buff[x+i+1][y]==1) { w++;i++; }
 			i=0;
-
-			while(x-i-1>=0&&buff[x-i-1][y]==1)
-			{
-				w++;
-				i++;
-			}
+			while(x-i-1>=0&&buff[x-i-1][y]==1) { w++;i++; }
 			i=0;
-
-			while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==1)
-			{
-				a++;
-				i++;
-			}
+			while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==1) { a++;i++; }
 			i=0;
-			while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==1)
-			{
-				a++;
-				i++;
-			}
+			while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==1) { a++;i++; }
 			i=0;
-			while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==1)
-			{
-				d++;
-				i++;
-			}
+			while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==1) { d++;i++; }
 			i=0;
-			while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==1)
-			{
-				d++;
-				i++;
-			}
+			while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==1) { d++;i++; }
 			i=0;
-			while(y+i+1<15&&buff[x][y+i+1]==1)
-			{
-				s++;
-				i++;
-			}
+			while(y+i+1<15&&buff[x][y+i+1]==1) { s++;i++; }
 			i=0;
-			while(y-i-1>=0&&buff[x][y-i-1]==1)
-			{
-				s++;
-				i++;
-			}
-			if(a>=4||w>=4||d>=4||s>=4)
-			{
-				return true;
-			}
+			while(y-i-1>=0&&buff[x][y-i-1]==1) { s++;i++; }
+			if(a>=4||w>=4||d>=4||s>=4) return true;
 		}
 		else if (log.acumulator%2==1) {
-			int a=0,w=0,s=0,d=0;
-			int i=0;
-			while(x+i+1<15&&buff[x+i+1][y]==-1)
-			{
-				w++;
-				i++;
-			}
+			int a=0,w=0,s=0,d=0,i=0;
+			while(x+i+1<15&&buff[x+i+1][y]==-1) { w++;i++; }
 			i=0;
-
-			while(x-i-1>=0&&buff[x-i-1][y]==-1)
-			{
-				w++;
-				i++;
-			}
+			while(x-i-1>=0&&buff[x-i-1][y]==-1) { w++;i++; }
 			i=0;
-
-			while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==-1)
-			{
-				a++;
-				i++;
-			}
+			while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==-1) { a++;i++; }
 			i=0;
-			while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==-1)
-			{
-				a++;
-				i++;
-			}
+			while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==-1) { a++;i++; }
 			i=0;
-			while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==-1)
-			{
-				d++;
-				i++;
-			}
+			while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==-1) { d++;i++; }
 			i=0;
-			while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==-1)
-			{
-				d++;
-				i++;
-			}
+			while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==-1) { d++;i++; }
 			i=0;
-			while(y+i+1<15&&buff[x][y+i+1]==-1)
-			{
-				s++;
-				i++;
-			}
+			while(y+i+1<15&&buff[x][y+i+1]==-1){ s++;i++; }
 			i=0;
-			while(y-i-1>=0&&buff[x][y-i-1]==-1)
-			{
-				s++;
-				i++;
-			}
-			if(a>=4||w>=4||d>=4||s>=4)
-			{
-				return true;
-			}
+			while(y-i-1>=0&&buff[x][y-i-1]==-1) { s++;i++; }
+			if(a>=4||w>=4||d>=4||s>=4) return true;
 		}
 		return false;
-
 	}
 	public static class log{										//下棋日志
 		public static int acumulator;
