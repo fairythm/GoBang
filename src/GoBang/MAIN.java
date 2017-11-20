@@ -1,4 +1,4 @@
-package Line;
+package GoBang;
 
 import javax.swing.*;
 import java.awt.Color;
