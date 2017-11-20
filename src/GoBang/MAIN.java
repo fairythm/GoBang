@@ -7,105 +7,105 @@ import java.awt.Color;
 import java.awt.event.*;
 
 public class MAIN {
-	//È«¾Ö±äÁ¿Çø
-		//static Graphics pencil;
-		public int i,j;
-		int [][] buff;							//ÆåÅÌ¾ØÕó
-		JTextField Screen;						//ÉèÖÃ·´À¡ĞÅÏ¢¶Ô»°¿ò
-		JFrame f;
-		JButton buttons[];
-		JButton takebackmove;					//ÉèÖÃ»ÚÆå°´Å¥
-		JButton NewGame;							//ÉèÖÃÖØ¿ª°´Å¥
-		boolean GameOver;
-	
-	
+	//å…¨å±€å˜é‡åŒº
+	//static Graphics pencil;
+	public int i,j;
+	int [][] buff;							//æ£‹ç›˜çŸ©é˜µ
+	JTextField Screen;						//è®¾ç½®åé¦ˆä¿¡æ¯å¯¹è¯æ¡†
+	JFrame f;
+	JButton buttons[];
+	JButton takebackmove;					//è®¾ç½®æ‚”æ£‹æŒ‰é’®
+	JButton NewGame;							//è®¾ç½®é‡å¼€æŒ‰é’®
+	boolean GameOver;
 
-	
+
+
+
 	public static void main(String [] args){
 		MAIN gui=new MAIN();
 		gui.go();
 	}
-	
+
 	public void go(){
-		
+
 		GameOver=false;
-		buff=new int[15][15];										//¹¹½¨ÆåÅÌ¾ØÕó
+		buff=new int[15][15];										//æ„å»ºæ£‹ç›˜çŸ©é˜µ
 		for(i=0;i<15;i++)for(j=0;j<15;j++)buff[i][j]=0;
-		
-		log.move=new int[225];										//ÏÂÆåÈÕÖ¾³õÊ¼»¯
+
+		log.move=new int[225];										//ä¸‹æ£‹æ—¥å¿—åˆå§‹åŒ–
 		for(i=0;i<225;i++)log.move[i]=-1;
-		
-		log.acumulator=0;											//Í¨ÓÃ¼ÆÊıÆ÷¹éÁã
-		i=0;		
-		
-		f=new JFrame();												//ÆåÅÌ´°¿Ú³õÊ¼»¯
+
+		log.acumulator=0;											//é€šç”¨è®¡æ•°å™¨å½’é›¶
+		i=0;
+
+		f=new JFrame();												//æ£‹ç›˜çª—å£åˆå§‹åŒ–
 		f.setLayout(null);
-		f.setTitle("Îå×ÓÆå");										//ÉèÖÃÓÎÏ·±êÌâ
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);			//ÉèÖÃ¹Ø±Õ
+		f.setTitle("äº”å­æ£‹");										//è®¾ç½®æ¸¸æˆæ ‡é¢˜
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);			//è®¾ç½®å…³é—­
 		f.setBackground(Color.black);
-		
-		Screen=new JTextField();									//ÉèÖÃĞÅÏ¢¶Ô»°´°¿Ú
+
+		Screen=new JTextField();									//è®¾ç½®ä¿¡æ¯å¯¹è¯çª—å£
 		Screen.add(new JTextField(60));
 		Screen.setBounds(0, 0, 900, 32);
 		Screen.setBackground(Color.white);
 		f.add(Screen);
 
-		takebackmove=new JButton("Take Back Move ");				//ÉèÖÃ»ÚÆå°´Å¥
-		takebackmoveListener t=new takebackmoveListener();			//¶¨Òå»ÚÆå°´Å¥¼àÌıÆ÷¶ÔÏó
-		moveListener[]m=new moveListener[225];						//³õÊ¼»¯ÏÂÆå¼àÌıÆ÷Êı×é
-		takebackmove.addActionListener(t);							//×¢²á»ÚÆå°´Å¥¼àÌıÆ÷
-		takebackmove.setBounds(0, 930, 450, 20);					//»ÚÆå°´Å¥ÅÅ°æ
+		takebackmove=new JButton("Take Back Move ");				//è®¾ç½®æ‚”æ£‹æŒ‰é’®
+		takebackmoveListener t=new takebackmoveListener();			//å®šä¹‰æ‚”æ£‹æŒ‰é’®ç›‘å¬å™¨å¯¹è±¡
+		moveListener[]m=new moveListener[225];						//åˆå§‹åŒ–ä¸‹æ£‹ç›‘å¬å™¨æ•°ç»„
+		takebackmove.addActionListener(t);							//æ³¨å†Œæ‚”æ£‹æŒ‰é’®ç›‘å¬å™¨
+		takebackmove.setBounds(0, 930, 450, 20);					//æ‚”æ£‹æŒ‰é’®æ’ç‰ˆ
 		//takebackmove.setBackground(Color.white);
-		f.add(takebackmove);										//½«»ÚÆå°´Å¥·ÅÖÃÓÚÆåÅÌÖĞ
-		
+		f.add(takebackmove);										//å°†æ‚”æ£‹æŒ‰é’®æ”¾ç½®äºæ£‹ç›˜ä¸­
+
 		NewGameListener newgame=new NewGameListener();
-		NewGame=new JButton("New Game");							//Éè¿ªÊ¼ĞÂÓÎÏ·°´Å¥
+		NewGame=new JButton("New Game");							//è®¾å¼€å§‹æ–°æ¸¸æˆæŒ‰é’®
 		NewGame.setBounds(450, 930, 450, 20);
 		NewGame.addActionListener(newgame);
 		f.add(NewGame);
-		
-		
-		buttons=new JButton[225];									//ÉèÖÃÂä×Ó°´¼ü
+
+
+		buttons=new JButton[225];									//è®¾ç½®è½å­æŒ‰é”®
 		for(i=0;i<225;i++){
-			buttons[i]=new JButton();								//button³õÊ¼»¯
-			buttons[i].setBounds((i/15)*60, (i%15)*60+30, 60, 60);	//buttonÅÅ°æ
+			buttons[i]=new JButton();								//buttonåˆå§‹åŒ–
+			buttons[i].setBounds((i/15)*60, (i%15)*60+30, 60, 60);	//buttonæ’ç‰ˆ
 			buttons[i].setBackground(Color.yellow);
 			//pencil.drawLine(15, 15, 50, 50);
-				
-			m[i]=new moveListener();								//³õÊ¼»¯Ã¿Ò»¸ö¼àÌıÆ÷
-			m[i].subscript=i;										//ÉèÖÃ¼àÌıÆ÷ÏÂ±êÒÔ±ã¼àÌıÆ÷ÄÜ±æÈÏËüµÄ°´Å¥
-			buttons[i].addActionListener(m[i]);						//×¢²á¼àÌıÆ÷
-			f.getContentPane().add(buttons[i]);						//½«ÆåÅÌ°´Å¥ÔØÈëÆåÅÌ
+
+			m[i]=new moveListener();								//åˆå§‹åŒ–æ¯ä¸€ä¸ªç›‘å¬å™¨
+			m[i].subscript=i;										//è®¾ç½®ç›‘å¬å™¨ä¸‹æ ‡ä»¥ä¾¿ç›‘å¬å™¨èƒ½è¾¨è®¤å®ƒçš„æŒ‰é’®
+			buttons[i].addActionListener(m[i]);						//æ³¨å†Œç›‘å¬å™¨
+			f.getContentPane().add(buttons[i]);						//å°†æ£‹ç›˜æŒ‰é’®è½½å…¥æ£‹ç›˜
 		}
 
-		
-		f.setSize(918,997);											//ÉèÖÃÆåÅÌÆÁÄ»·Ö±æÂÊ
 
-		f.setVisible(true);											//´ò¿ªÓÎÏ·½çÃæ
+		f.setSize(918,997);											//è®¾ç½®æ£‹ç›˜å±å¹•åˆ†è¾¨ç‡
+
+		f.setVisible(true);											//æ‰“å¼€æ¸¸æˆç•Œé¢
 	}
 
-	
-	private class takebackmoveListener implements ActionListener	//»ÚÆå¼àÌıÆ÷
-   	{
+
+	private class takebackmoveListener implements ActionListener	//æ‚”æ£‹ç›‘å¬å™¨
+	{
 		public void actionPerformed(ActionEvent event)
 		{
 			if(GameOver==false){
 				if(log.acumulator==0){
-					Screen.setText("´ó¸çÄã»¹Ã»ÏÂÆåÄØ");
+					Screen.setText("å¤§å“¥ä½ è¿˜æ²¡ä¸‹æ£‹å‘¢");
 					return;
 				}
-				Screen.setText("Äã»ÚÆåÁË£¬Õæ¿É³Ü£ş¡÷£ş ");
-          	
+				Screen.setText("ä½ æ‚”æ£‹äº†ï¼ŒçœŸå¯è€»ï¿£â–³ï¿£ ");
+
 				buttons[log.move[log.acumulator]].setBackground(Color.yellow);;
 				log.move[log.acumulator]=-1;
 				log.acumulator--;
 			}
-			else Screen.setText("ÓÎÏ·ÒÑ¾­½áÊø");
+			else Screen.setText("æ¸¸æˆå·²ç»ç»“æŸ");
 		}
 
-     }
-	private class NewGameListener implements ActionListener	//ĞÂÓÎÏ·°´Å¥¼àÌıÆ÷
-   	{
+	}
+	private class NewGameListener implements ActionListener	//æ–°æ¸¸æˆæŒ‰é’®ç›‘å¬å™¨
+	{
 		public void actionPerformed(ActionEvent event)
 		{
 			int i=0,j=0;
@@ -119,169 +119,170 @@ public class MAIN {
 			GameOver=false;
 		}
 
-     }
-	public class moveListener implements ActionListener				//ÏÂÆå¼àÌı
-    	{
-			public void actionPerformed(ActionEvent event){			//ÉèÖÃÏÂÆåÊÂ¼ş
-				if(GameOver==false)
-				{
-				//String buttonName = event.getActionCommand();		//±ÜÃâÔÚÍ¬Ò»¸öÎ»ÖÃÉÏ·´¸´ÏÂÆå
+	}
+	public class moveListener implements ActionListener				//ä¸‹æ£‹ç›‘å¬
+	{
+		public void actionPerformed(ActionEvent event){			//è®¾ç½®ä¸‹æ£‹äº‹ä»¶
+			if(GameOver==false)
+			{
+				//String buttonName = event.getActionCommand();		//é¿å…åœ¨åŒä¸€ä¸ªä½ç½®ä¸Šåå¤ä¸‹æ£‹
 				if (buff[subscript%15][subscript/15]==1||buff[subscript%15][subscript/15]==-1)
 					return;
 				if(log.acumulator%2==0){
 					//buttons[subscript].setText("X");
 					buttons[subscript].setBackground(Color.black);
-					Screen.setText("ºÚÆåÂä×Ó  ×ÜÂä×ÓÊı:"+(log.acumulator+1));
+					Screen.setText("é»‘æ£‹è½å­  æ€»è½å­æ•°:"+(log.acumulator+1));
+					System.out.println("é»‘æ£‹è½å­ æ€»è½å­æ•°:"+(log.acumulator+1));
 					buff[subscript%15][subscript/15]=1;
 					if(panduan(subscript)){
-						Screen.setText("ºÚÆåÓ®");
+						Screen.setText("é»‘æ£‹èµ¢");
 						GameOver=true;
 					}
 				}
 				else{
 					//buttons[subscript].setText("O");
 					buttons[subscript].setBackground(Color.white);
-					Screen.setText("°×ÆåÂä×Ó  ×ÜÂä×ÓÊı:"+(log.acumulator+1));
+					Screen.setText("ç™½æ£‹è½å­  æ€»è½å­æ•°:"+(log.acumulator+1));
 					buff[subscript%15][subscript/15]=-1;
 					if(panduan(subscript)){
-						Screen.setText("°×ÆåÓ®");
+						Screen.setText("ç™½æ£‹èµ¢");
 						GameOver=true;
 					}
 				}
-				
+
 				log.acumulator++;
-				log.move[log.acumulator]=subscript;					//ÎªÏÂÆåÈÕÖ¾Ìí¼Ó:µÚacumulator¸öÈÕÖ¾ÊÇÂä×ÓÓÚsubscriptÎ»ÖÃ
-				}
-				else Screen.setText("ÓÎÏ·ÒÑ¾­½áÊø");
+				log.move[log.acumulator]=subscript;					//ä¸ºä¸‹æ£‹æ—¥å¿—æ·»åŠ :ç¬¬acumulatorä¸ªæ—¥å¿—æ˜¯è½å­äºsubscriptä½ç½®
 			}
-			int subscript;	
-      }
-	public boolean panduan(int subscript)							//Ó®ÆåÅĞ¶ÏÆ÷
-	   {
-			int x,y;
-			x=subscript%15;
-			y=subscript/15;
-			
-		   if(log.acumulator%2==0)
-		   {
-			   int a=0,w=0,s=0,d=0;
-			   int i=0;
-
-			  while(x+i+1<15&&buff[x+i+1][y]==1)
-			   {
-				   w++;
-				   i++;
-			   }
-			   i=0;
-
-			   while(x-i-1>=0&&buff[x-i-1][y]==1)
-			   {
-				   w++;
-				   i++;
-			   }
-			   i=0;
-
-			   while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==1)
-			   {
-				   a++;
-				   i++;
-			   }
-			   i=0;
-			   while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==1)
-			   {
-				   a++;
-				   i++;
-			   }
-			   i=0;
-			   while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==1)
-			   {
-				   d++;
-				   i++;
-			   }
-			   i=0;
-			   while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==1)
-			   {
-				   d++;
-				   i++;
-			   }
-			   i=0;
-			   while(y+i+1<15&&buff[x][y+i+1]==1)
-			   {
-				   s++;
-				   i++;
-			   }
-			   i=0;
-			   while(y-i-1>=0&&buff[x][y-i-1]==1)
-			   {
-				   s++;
-				   i++;
-			   }
-			   if(a>=4||w>=4||d>=4||s>=4)
-			   {
-				   return true;
-			   }
-		   }
-		   else if (log.acumulator%2==1) {
-			   int a=0,w=0,s=0,d=0;
-			   int i=0;
-			   while(x+i+1<15&&buff[x+i+1][y]==-1)
-			   {
-				   w++;
-				   i++;
-			   }
-			   i=0;
-
-			   while(x-i-1>=0&&buff[x-i-1][y]==-1)
-			   {
-				   w++;
-				   i++;
-			   }
-			   i=0;
-
-			   while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==-1)
-			   {
-				   a++;
-				   i++;
-			   }
-			   i=0;
-			   while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==-1)
-			   {
-				   a++;
-				   i++;
-			   }
-			   i=0;
-			   while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==-1)
-			   {
-				   d++;
-				   i++;
-			   }
-			   i=0;
-			   while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==-1)
-			   {
-				   d++;
-				   i++;
-			   }
-			   i=0;
-			   while(y+i+1<15&&buff[x][y+i+1]==-1)
-			   {
-				   s++;
-				   i++;
-			   }
-			   i=0;
-			   while(y-i-1>=0&&buff[x][y-i-1]==-1)
-			   {
-				   s++;
-				   i++;
-			   }
-			   if(a>=4||w>=4||d>=4||s>=4)
-			   {
-				   return true;
-			   }
+			else Screen.setText("æ¸¸æˆå·²ç»ç»“æŸ");
 		}
-		   return false;
-		   
-	   }
-	public static class log{										//ÏÂÆåÈÕÖ¾
+		int subscript;
+	}
+	public boolean panduan(int subscript)							//èµ¢æ£‹åˆ¤æ–­å™¨
+	{
+		int x,y;
+		x=subscript%15;
+		y=subscript/15;
+
+		if(log.acumulator%2==0)
+		{
+			int a=0,w=0,s=0,d=0;
+			int i=0;
+
+			while(x+i+1<15&&buff[x+i+1][y]==1)
+			{
+				w++;
+				i++;
+			}
+			i=0;
+
+			while(x-i-1>=0&&buff[x-i-1][y]==1)
+			{
+				w++;
+				i++;
+			}
+			i=0;
+
+			while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==1)
+			{
+				a++;
+				i++;
+			}
+			i=0;
+			while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==1)
+			{
+				a++;
+				i++;
+			}
+			i=0;
+			while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==1)
+			{
+				d++;
+				i++;
+			}
+			i=0;
+			while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==1)
+			{
+				d++;
+				i++;
+			}
+			i=0;
+			while(y+i+1<15&&buff[x][y+i+1]==1)
+			{
+				s++;
+				i++;
+			}
+			i=0;
+			while(y-i-1>=0&&buff[x][y-i-1]==1)
+			{
+				s++;
+				i++;
+			}
+			if(a>=4||w>=4||d>=4||s>=4)
+			{
+				return true;
+			}
+		}
+		else if (log.acumulator%2==1) {
+			int a=0,w=0,s=0,d=0;
+			int i=0;
+			while(x+i+1<15&&buff[x+i+1][y]==-1)
+			{
+				w++;
+				i++;
+			}
+			i=0;
+
+			while(x-i-1>=0&&buff[x-i-1][y]==-1)
+			{
+				w++;
+				i++;
+			}
+			i=0;
+
+			while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==-1)
+			{
+				a++;
+				i++;
+			}
+			i=0;
+			while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==-1)
+			{
+				a++;
+				i++;
+			}
+			i=0;
+			while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==-1)
+			{
+				d++;
+				i++;
+			}
+			i=0;
+			while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==-1)
+			{
+				d++;
+				i++;
+			}
+			i=0;
+			while(y+i+1<15&&buff[x][y+i+1]==-1)
+			{
+				s++;
+				i++;
+			}
+			i=0;
+			while(y-i-1>=0&&buff[x][y-i-1]==-1)
+			{
+				s++;
+				i++;
+			}
+			if(a>=4||w>=4||d>=4||s>=4)
+			{
+				return true;
+			}
+		}
+		return false;
+
+	}
+	public static class log{										//ä¸‹æ£‹æ—¥å¿—
 		public static int acumulator;
 		public static int move[];
 	}
