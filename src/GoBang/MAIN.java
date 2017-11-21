@@ -2,13 +2,11 @@ package GoBang;
 
 import javax.swing.*;
 import java.awt.Color;
-//import java.awt.Graphics;
-//import java.awt.*;
 import java.awt.event.*;
-
 public class MAIN {
 	//全局变量区
 	//static Graphics pencil;
+	//Ellipse2D BlackPoint,WhitePoint;
 	public int i,j;
 	private int [][] buff;							//棋盘矩阵
 	private JTextField Screen;						//设置反馈信息对话框
@@ -27,6 +25,10 @@ public class MAIN {
 	}
 
 	public void go(){
+
+		//BlackPoint=new Ellipse2D.Float(30,30,40,40);
+
+		//WhitePoint=new Ellipse2D.Float(30,30,40,40);
 
 		GameOver=false;
 		buff=new int[15][15];										//构建棋盘矩阵
