@@ -148,7 +148,7 @@ public class MAIN {
 					Screen.setText("黑棋落子  总落子数:"+(log.acumulator+1));
 					//System.out.println("黑棋落子 总落子数:"+(log.acumulator+1));
 					buff[subscript%15][subscript/15]=1;
-					if(panduan(subscript)){
+					if(JudgeWinner(subscript)){
 						Screen.setText("黑棋赢");
 						GameOver=true;
 					}
@@ -159,7 +159,7 @@ public class MAIN {
 					buttons[subscript].setBackground(Color.white);
 					Screen.setText("白棋落子  总落子数:"+(log.acumulator+1));
 					buff[subscript%15][subscript/15]=-1;
-					if(panduan(subscript)){
+					if(JudgeWinner(subscript)){
 						Screen.setText("白棋赢");
 						GameOver=true;
 					}
@@ -172,7 +172,7 @@ public class MAIN {
 		}
 		int subscript;
 	}
-	private boolean panduan(int subscript)							//赢棋判断器
+	private boolean JudgeWinner(int subscript)							//赢棋判断器
 	{
 		int x,y;
 		x=subscript%15;
@@ -180,42 +180,26 @@ public class MAIN {
 
 		if(log.acumulator%2==0)
 		{
-			int a=0,w=0,s=0,d=0;
-			int i=0;
-
-			while(x+i+1<15&&buff[x+i+1][y]==1) { w++;i++; }
-			i=0;
-			while(x-i-1>=0&&buff[x-i-1][y]==1) { w++;i++; }
-			i=0;
-			while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==1) { a++;i++; }
-			i=0;
-			while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==1) { a++;i++; }
-			i=0;
-			while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==1) { d++;i++; }
-			i=0;
-			while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==1) { d++;i++; }
-			i=0;
-			while(y+i+1<15&&buff[x][y+i+1]==1) { s++;i++; }
-			i=0;
+			int a=0,w=0,s=0,d=0,i=0;
+			while(x+i+1<15&&buff[x+i+1][y]==1) { w++;i++; }i=0;
+			while(x-i-1>=0&&buff[x-i-1][y]==1) { w++;i++; }i=0;
+			while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==1) { a++;i++; }i=0;
+			while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==1) { a++;i++; }i=0;
+			while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==1) { d++;i++; }i=0;
+			while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==1) { d++;i++; }i=0;
+			while(y+i+1<15&&buff[x][y+i+1]==1) { s++;i++; }i=0;
 			while(y-i-1>=0&&buff[x][y-i-1]==1) { s++;i++; }
 			if(a>=4||w>=4||d>=4||s>=4) return true;
 		}
 		else if (log.acumulator%2==1) {
 			int a=0,w=0,s=0,d=0,i=0;
-			while(x+i+1<15&&buff[x+i+1][y]==-1) { w++;i++; }
-			i=0;
-			while(x-i-1>=0&&buff[x-i-1][y]==-1) { w++;i++; }
-			i=0;
-			while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==-1) { a++;i++; }
-			i=0;
-			while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==-1) { a++;i++; }
-			i=0;
-			while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==-1) { d++;i++; }
-			i=0;
-			while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==-1) { d++;i++; }
-			i=0;
-			while(y+i+1<15&&buff[x][y+i+1]==-1){ s++;i++; }
-			i=0;
+			while(x+i+1<15&&buff[x+i+1][y]==-1) { w++;i++; }i=0;
+			while(x-i-1>=0&&buff[x-i-1][y]==-1) { w++;i++; }i=0;
+			while(x+i+1<15&&y+i+1<15&&buff[x+i+1][y+i+1]==-1) { a++;i++; }i=0;
+			while(x-i-1>=0&&y-i-1>=0&&buff[x-i-1][y-i-1]==-1) { a++;i++; }i=0;
+			while(x-i-1>=0&&y+i+1<15&&buff[x-i-1][y+i+1]==-1) { d++;i++; }i=0;
+			while(x+i+1<15&&y-i-1>=0&&buff[x+i+1][y-i-1]==-1) { d++;i++; }i=0;
+			while(y+i+1<15&&buff[x][y+i+1]==-1){ s++;i++; }i=0;
 			while(y-i-1>=0&&buff[x][y-i-1]==-1) { s++;i++; }
 			if(a>=4||w>=4||d>=4||s>=4) return true;
 		}
