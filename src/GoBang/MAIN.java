@@ -142,7 +142,7 @@ public class MAIN {
 				if (buff[subscript%15][subscript/15]==1||buff[subscript%15][subscript/15]==-1)
 					return;
 				if(log.acumulator%2==0){
-					//buttons[subscript].setText("X");
+					//buttons[subscript].setText("X"); 
 					takebackmove.setText("执黑方悔棋");
 					buttons[subscript].setBackground(Color.black);
 					Screen.setText("黑棋落子  总落子数:"+(log.acumulator+1));
