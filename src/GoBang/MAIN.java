@@ -150,7 +150,7 @@ public class MAIN {
 				}
 
 				log.acumulator++;
-				log.move[log.acumulator]=subscript;					//为下棋日志添加:第acumulator个日志是落子于subscript位置
+				log.move[log.acumulator]=subscript;	//为下棋日志添加:第acumulator个日志是落子于subscript位置
 			}
 			else Screen.setText("游戏已经结束");
 		}
