@@ -3,13 +3,14 @@ package GoBang;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.*;
+//import javax.swing.event.*;
 public class MAIN {
 	private int i,j;
-	private int [][] buff;							//棋盘矩阵
-	private JTextField Screen;						//设置反馈信息对话框
+	private int [][] buff;											//棋盘矩阵
+	private JTextField Screen;										//设置反馈信息对话框
 	private final ThreadLocal<JFrame> f = new ThreadLocal<JFrame>();
 	private JButton buttons[];
-	private JButton takebackmove;					//设置悔棋按钮
+	private JButton takebackmove;									//设置悔棋按钮
 	private boolean GameOver;
 
 	public static void main(String [] args){
@@ -29,27 +30,27 @@ public class MAIN {
 		i=0;
 
 		f.set(new JFrame());												//棋盘窗口初始化
-		f.get().setLayout(null);
-		f.get().setTitle("五子棋");											//设置游戏标题
+
+		f.get().setTitle("GoBang");											//设置游戏标题
 		f.get().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);	//设置关闭
 		f.get().setBackground(Color.black);
 
-		Screen=new JTextField();									//设置信息对话窗口
+		Screen=new JTextField();										//设置信息对话窗口
 		Screen.add(new JTextField(60));
 		Screen.setBounds(0, 0, 900, 32);
 		Screen.setBackground(Color.white);
 		f.get().add(Screen);
 
-		takebackmove=new JButton("");							//设置悔棋按钮
-		TakeBackMoveListener t=new TakeBackMoveListener();			//定义悔棋按钮监听器对象
-		moveListener[]m=new moveListener[225];						//初始化下棋监听器数组
-		takebackmove.addActionListener(t);							//注册悔棋按钮监听器
-		takebackmove.setBounds(0, 930, 450, 40);					//悔棋按钮排版
+		takebackmove=new JButton("");								//设置悔棋按钮
+		TakeBackMoveListener t=new TakeBackMoveListener();				//定义悔棋按钮监听器对象
+		moveListener[]m=new moveListener[225];							//初始化下棋监听器数组
+		takebackmove.addActionListener(t);								//注册悔棋按钮监听器
+		takebackmove.setBounds(0, 930, 450, 40);		//悔棋按钮排版
 		takebackmove.setBackground(Color.white);
 		f.get().add(takebackmove);										//将悔棋按钮放置于棋盘中
 
 		NewGameListener newgame=new NewGameListener();
-		JButton newGame = new JButton("新游戏");
+		JButton newGame = new JButton("New Game");
 		newGame.setBounds(450, 930, 450, 40);
 		newGame.addActionListener(newgame);
 		newGame.setBackground(Color.white);
@@ -73,7 +74,6 @@ public class MAIN {
 		f.get().setVisible(true);											//打开游戏界面
 	}
 
-
 	private class TakeBackMoveListener implements ActionListener	//悔棋监听器
 	{
 		public void actionPerformed(ActionEvent event)
@@ -84,11 +84,11 @@ public class MAIN {
 				}
 				if(log.acumulator!=1) {
 					if (log.acumulator % 2 == 0) {
-						Screen.setText("白方悔了一步棋");
-						takebackmove.setText("执黑方悔棋");
+						Screen.setText("White took back a move");
+						takebackmove.setText("Undo");
 					} else {
-						Screen.setText("黑方悔了一步棋");
-						takebackmove.setText("执白方悔棋");
+						Screen.setText("Black took back a move");
+						takebackmove.setText("Undo");
 					}
 				}
 				else takebackmove.setText("");
@@ -98,7 +98,7 @@ public class MAIN {
 				log.move[log.acumulator]=-1;
 				log.acumulator--;
 			}
-			else Screen.setText("游戏已经结束");
+			else Screen.setText("Game Over");
 		}
 	}
 	private class NewGameListener implements ActionListener			//新游戏按钮监听器
@@ -111,7 +111,7 @@ public class MAIN {
 				buttons[i].setBackground(Color.yellow);
 				log.move[i]=-1;
 			}
-			Screen.setText("开始新游戏");
+			Screen.setText("New Game");
 			log.acumulator=0;
 			GameOver=false;
 		}
@@ -126,25 +126,25 @@ public class MAIN {
 					return;
 				if(log.acumulator%2==0){
 					//buttons[subscript].setText("X");
-					takebackmove.setText("执黑方悔棋");
+					takebackmove.setText("Undo");
 					buttons[subscript].setBackground(Color.black);
-					Screen.setText("黑棋落子  总落子数:"+(log.acumulator+1));
+					Screen.setText("Black dropped  Total drops:"+(log.acumulator+1));
 					//System.out.println("黑棋落子 总落子数:"+(log.acumulator+1));
 					buff[subscript%15][subscript/15]=1;
 					if(JudgeWinner(subscript)){
 						//JOptionPane.showMessageDialog(frame,"按钮1 被点击");
-						Screen.setText("黑棋赢");
+						Screen.setText("Black wins");
 						GameOver=true;
 					}
 				}
 				else{
 					//buttons[subscript].setText("O");
-					takebackmove.setText("执白方悔棋");
+					takebackmove.setText("Undo");
 					buttons[subscript].setBackground(Color.white);
-					Screen.setText("白棋落子  总落子数:"+(log.acumulator+1));
+					Screen.setText("White dropped  Total drops:"+(log.acumulator+1));
 					buff[subscript%15][subscript/15]=-1;
 					if(JudgeWinner(subscript)){
-						Screen.setText("白棋赢");
+						Screen.setText("White wins");
 						GameOver=true;
 					}
 				}
@@ -152,7 +152,7 @@ public class MAIN {
 				log.acumulator++;
 				log.move[log.acumulator]=subscript;					//为下棋日志添加:第acumulator个日志是落子于subscript位置
 			}
-			else Screen.setText("游戏已经结束");
+			else Screen.setText("Game is already over");
 		}
 		int subscript;
 	}
